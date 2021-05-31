@@ -1,9 +1,17 @@
+package JavaIM.channel;
+
+import JavaIM.Server;
+import JavaIM.chatGroup.ChatGroup;
+import JavaIM.message.Message;
+import JavaIM.close.Close;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
 
 /**
  * 用户类
+ * 
  * @author DearAhri520
  */
 public class Channel implements Runnable, Serializable {
@@ -17,20 +25,20 @@ public class Channel implements Runnable, Serializable {
     private Boolean isRunning;                                  //客户端是否正在运行
     private Boolean isLogin=false;                              //客户端是否登录
 
-    HashSet<Channel> myFriendList=new HashSet<>();              //所有的好友
-    HashSet<ChatGroup> myGroupList=new HashSet<>();             //所有的群聊
+    public HashSet<Channel> myFriendList=new HashSet<>();              //所有的好友
+    public HashSet<ChatGroup> myGroupList=new HashSet<>();             //所有的群聊
     private HashSet<Message> waitingToDo=new HashSet<>();       //等待处理的消息
     private HashSet<Message> notLoginMessage =new HashSet<>();    //未上线时接收的消息
 
-    String getName() {
+    public String getName() {
         return name_String;
     }
 
-    String getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    boolean getIsRunning(){
+    public boolean getIsRunning(){
         return isRunning;
     }
 
@@ -38,7 +46,7 @@ public class Channel implements Runnable, Serializable {
         return myGroupList;
     }
 
-    Channel(Socket socket){
+    public Channel(Socket socket){
         /*获取socket*/
         this.socket=socket;
         /*将用户标志为正在运行*/
@@ -69,7 +77,7 @@ public class Channel implements Runnable, Serializable {
      * 服务端的receive方法，从对应客户端接收消息
      * @return 返回接收的消息，如果用户不运行，则返回一个消息内容为空的消息
      */
-    Message receive(){
+    public Message receive(){
         if (isRunning){
             Message messageFromClient=new Message("");
             try {
@@ -87,7 +95,7 @@ public class Channel implements Runnable, Serializable {
      * 服务端的send方法，向对应的客户端发送消息
      * @param message 向客户端发送的消息
      */
-    void send(Message message){                //如果用户正在运行且用户已经登陆，此方法才被执行
+    public void send(Message message){                //如果用户正在运行且用户已经登陆，此方法才被执行
         if(isLogin||message.isLoginOrRegister){//如果已经登陆或者该消息在登陆或注册时发送
             if (isRunning){
                 try{
@@ -290,29 +298,29 @@ public class Channel implements Runnable, Serializable {
 
     /*群聊菜单*/
     private void groupMenu(){
-            Message messageOfGroupMenu;
-            this.send(new Message("请输入指令"));
-            this.send(new Message("--------群聊菜单--------"));
-            this.send(new Message("1. 查看群聊列表"));
-            this.send(new Message("2. 创建群聊"));
-            this.send(new Message("3. 加入群聊"));
-            this.send(new Message("4. 退出群聊"));
-            this.send(new Message("5. 邀请群员"));
-            this.send(new Message("6. 群聊聊天"));
-            this.send(new Message("输入@Exit即可返回菜单"));
-            while(isRunning){
-                messageOfGroupMenu=this.receive();
-                if ("@Exit".equals(messageOfGroupMenu.getMessage())){
-                    this.send(new Message("已返回菜单"));
-                    return;
-                }
-                switch (messageOfGroupMenu.getMessage()){//选择指令
-                    case "1": SeeGroupList();break;
-                    case "2": ChatGroup.createGroup(this);break;
-                    case "3": ChatGroup.joinGroup(this);break;
-                    case "4": ChatGroup.exitGroup(this);break;
-                    case "5": ChatGroup.inviteGroupMember(this);break;
-                    case "6": ChatGroup.chatWithGroup(this);break;
+        Message messageOfGroupMenu;
+        this.send(new Message("请输入指令"));
+        this.send(new Message("--------群聊菜单--------"));
+        this.send(new Message("1. 查看群聊列表"));
+        this.send(new Message("2. 创建群聊"));
+        this.send(new Message("3. 加入群聊"));
+        this.send(new Message("4. 退出群聊"));
+        this.send(new Message("5. 邀请群员"));
+        this.send(new Message("6. 群聊聊天"));
+        this.send(new Message("输入@Exit即可返回菜单"));
+        while(isRunning){
+            messageOfGroupMenu=this.receive();
+            if ("@Exit".equals(messageOfGroupMenu.getMessage())){
+                this.send(new Message("已返回菜单"));
+                return;
+            }
+            switch (messageOfGroupMenu.getMessage()){//选择指令
+                case "1": SeeGroupList();break;
+                case "2": ChatGroup.createGroup(this);break;
+                case "3": ChatGroup.joinGroup(this);break;
+                case "4": ChatGroup.exitGroup(this);break;
+                case "5": ChatGroup.inviteGroupMember(this);break;
+                case "6": ChatGroup.chatWithGroup(this);break;
                 default:
                     this.send(new Message("指令错误,请重新输入"));
             }
@@ -320,7 +328,7 @@ public class Channel implements Runnable, Serializable {
     }
 
     /*发送好友列表*/
-    void SeeFriendList(){
+    public void SeeFriendList(){
         if (myFriendList.size()==0){
             this.send(new Message("您还没有添加好友，快去添加好友吧"));
             return;
@@ -479,7 +487,7 @@ public class Channel implements Runnable, Serializable {
     }
 
     /*发送群聊列表*/
-    void SeeGroupList(){
+    public void SeeGroupList(){
         if (myGroupList.size()==0){
             this.send(new Message("您还没有加入群聊，快去添加群聊吧"));
             return;
@@ -563,15 +571,18 @@ public class Channel implements Runnable, Serializable {
         }
         this.send(new Message("已返回菜单"));
     }
-    
+
     //释放资源
     private void release(){
         Server.getAllChannel().remove(this);
         this.isLogin=false;
-        this.isRunning=false;                                           //停止运行
+        //停止运行
+        this.isRunning=false;
         Server.getAllChannel().add(this);
-        System.out.println(this.socket.getInetAddress()+"下线了");      //输出下线的用户
-        Close.close(objectInputStream,objectOutputStream,socket);      //关闭资源
+        //输出下线的用户
+        System.out.println(this.name_String+"下线了");
+        //关闭资源
+        Close.close(objectInputStream,objectOutputStream,socket);
         System.out.println("该用户的资源已经释放");
     }
 

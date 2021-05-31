@@ -1,10 +1,18 @@
+package JavaIM;
+
+import JavaIM.channel.Channel;
+import JavaIM.chatGroup.ChatGroup;
+
 import java.io.*;
 import java.net.*;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/**服务端*/
+/**
+ * 服务端
+ * @author DearAhri520
+ */
 public class Server {
 
     /**所有的注册过的用户*/
@@ -26,19 +34,16 @@ public class Server {
             /*建立连接*/
             System.out.println("一个客户端建立了连接");
             Channel c = new Channel(socket);
-            /*创建一个新用户*/
-            System.out.println("Yes_1");
             /*开启一个新用户的线程*/
             new Thread(c).start();
-            System.out.println("Yes_2");
         }
     }
 
-    static Set<Channel> getAllChannel() {
+    public static Set<Channel> getAllChannel() {
         return allChannel;
     }
 
-    static Set<ChatGroup> getAllGroup() {
+    public static Set<ChatGroup> getAllGroup() {
         return allGroup;
     }
 }

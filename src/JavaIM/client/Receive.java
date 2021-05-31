@@ -1,15 +1,24 @@
+package JavaIM.client;
+
+import JavaIM.close.Close;
+import JavaIM.message.Message;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
-//客户端的receive方法，用多线程封装（完成）
+/**
+ * @author DearAhri520
+ *
+ * 客户端的receive方法，用多线程封装
+ */
+/**客户端的receive方法，用多线程封装*/
 public class Receive implements Runnable{
     private Socket socket;
     private ObjectInputStream objectInputStream=null;
     private boolean isRunning;
 
-    //构造器
-    Receive(Socket socket){
+    public Receive(Socket socket){
         this.socket=socket;
         this.isRunning=true;
         try{

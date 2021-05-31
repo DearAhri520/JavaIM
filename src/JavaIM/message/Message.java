@@ -1,23 +1,28 @@
+package JavaIM.message;
+
+import JavaIM.channel.Channel;
+import JavaIM.chatGroup.ChatGroup;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- * 定义一个消息类，消息的传递通过消息类进行
- * @author DearAhri520
- */
 public class Message implements Serializable {//该消息类可被序列化
 
     /**需要发送的消息*/
     private String message;
     /**需要被处理的消息*/
-    boolean isWaitingToDo=false;
-    boolean isGroup=false;                  //是否为加群消息
-    boolean isFriend=false;                 //是否为加好友消息
-    boolean isLoginOrRegister=false;        //是否为注册时或登录时发送的消息
-    Channel sendFrom= null;                 //消息发送者
-    ChatGroup theChatGroup=null;            //想要加入的群聊
-    Date theMessageSendTime;
+    public boolean isWaitingToDo=false;
+    /**是否为加群消息*/
+    public boolean isGroup=false;
+    /**是否为加好友消息*/
+    public boolean isFriend=false;
+    /**是否为注册时或登录时发送的消息*/
+    public boolean isLoginOrRegister=false;
+    /**消息发送者*/
+    public Channel sendFrom= null;
+    /**想要加入的群聊*/
+    public ChatGroup theChatGroup=null;
 
     public Message(String message){
         this.message=message;
@@ -46,7 +51,7 @@ public class Message implements Serializable {//该消息类可被序列化
         this.isLoginOrRegister=true;
     }
 
-    String getMessage() {
+    public String getMessage() {
         return message;
     }
 

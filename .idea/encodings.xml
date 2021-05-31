@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/Channel.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/ChatGroup.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/Client.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/Close.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/Message.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/Receive.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/Send.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/Server.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/Client.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/Client.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/Client.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/Server.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/Server.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/Server.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/channel/Channel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/channel/Channel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/chatGroup/ChatGroup.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/chatGroup/ChatGroup.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/client/Receive.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/client/Receive.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/client/Send.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/client/Send.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/close/Close.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/close/Close.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/message/Message.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/JavaIM/message/Message.java" charset="GBK" />
   </component>
 </project>

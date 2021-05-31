@@ -1,11 +1,19 @@
+package JavaIM.chatGroup;
+
+import JavaIM.Server;
+import JavaIM.message.Message;
+import JavaIM.channel.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 
 /**
- * 群聊
+ * 群聊类
+ *
+ * @author DearAhri520
  */
-class ChatGroup implements Serializable {
+public class ChatGroup implements Serializable {
     /**分配的群聊账号*/
     private static int GroupNumber = 100000;
     /**所有的群成员列表*/
@@ -34,11 +42,11 @@ class ChatGroup implements Serializable {
         GroupNumber++;
     }
 
-    String getName() {
+    public String getName() {
         return this.name;
     }
 
-    String getGroupNumber() {
+    public String getGroupNumber() {
         return this.groupNumber;
     }
 
@@ -46,7 +54,7 @@ class ChatGroup implements Serializable {
         return this.groupMaster;
     }
 
-    HashSet<Channel> getGroupAllChannel() {
+    public HashSet<Channel> getGroupAllChannel() {
         return this.groupAllChannel;
     }
 
@@ -81,7 +89,7 @@ class ChatGroup implements Serializable {
      * 创建群聊
      * @param channel 群主
      */
-    static void createGroup(Channel channel) {
+    public static void createGroup(Channel channel) {
         channel.send(new Message("请输入群聊名称或输入@Exit返回群聊菜单"));
         //创建新群聊，并且设置群主和群聊名称
         Message getMessage = channel.receive();
@@ -102,7 +110,7 @@ class ChatGroup implements Serializable {
      * 申请加入群聊
      * @param channel 想要加入群聊的用户
      */
-    static void joinGroup(Channel channel) {
+    public static void joinGroup(Channel channel) {
         boolean isFind = false;
         ChatGroup theFindGroup = null;
 
@@ -155,7 +163,7 @@ class ChatGroup implements Serializable {
      * 退出群聊
      * @param channel 退出群聊的用户
      */
-    static void exitGroup(Channel channel) {
+    public static void exitGroup(Channel channel) {
         boolean isFind = false;
 
         channel.SeeGroupList();             //发送群聊列表
@@ -204,7 +212,7 @@ class ChatGroup implements Serializable {
      * 群聊聊天
      * @param channel 发送群聊信息的用户
      */
-    static void chatWithGroup(Channel channel) {
+    public static void chatWithGroup(Channel channel) {
         String chatWithGroup;
         String sendToGroup;
         boolean isFind = false;
@@ -254,7 +262,7 @@ class ChatGroup implements Serializable {
     /**
      * 邀请群成员(只能邀请自己的好友,只有当你是群主时才能邀请好友)
      */
-    static void inviteGroupMember(Channel channel) {
+    public static void inviteGroupMember(Channel channel) {
         boolean isFindFriend = false;
         boolean isFindGroup = false;
         String inviteGroupMemberNumber;
